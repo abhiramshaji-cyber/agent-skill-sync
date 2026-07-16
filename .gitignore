@@ -5,4 +5,3 @@ __pycache__/
 .venv/
 .DS_Store
 .skill-sync-state.json
-
