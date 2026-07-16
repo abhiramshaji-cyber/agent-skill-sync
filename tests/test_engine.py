@@ -106,6 +106,9 @@ class SyncTests(unittest.TestCase):
         prompt = self.paths.codex_prompts / "ship.md"
         self.assertIn("$ARGUMENTS", prompt.read_text())
         self.assertIn("~/.codex/skills/claude-command-ship/ship.py", prompt.read_text())
+        second = sync(self.paths, direction="both", apply=True)
+        self.assertFalse((self.paths.claude_skills / "claude-command-ship").exists())
+        self.assertEqual(second.changed, 0)
 
     def test_state_is_valid_json(self) -> None:
         self.skill(self.paths.claude_skills, "alpha", "initial")

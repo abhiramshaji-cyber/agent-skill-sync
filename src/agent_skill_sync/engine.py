@@ -329,6 +329,7 @@ def sync(
 ) -> Report:
     claude = skill_dirs(paths.claude_skills)
     codex = skill_dirs(paths.codex_skills)
+    codex = {name: path for name, path in codex.items() if not name.startswith("claude-command-")}
     state = load_state(paths.state_file)
     previous = state.setdefault("skills", {})
     actions: list[Action] = []
