@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=58"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-skill-sync"
+version = "0.1.0"
+description = "Safely synchronize skills and commands between Claude Code and Codex"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Abhiram Shaji" }]
+dependencies = []
+
+[project.scripts]
+skill-sync = "agent_skill_sync.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
