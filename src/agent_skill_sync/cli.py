@@ -16,6 +16,7 @@ def parser() -> argparse.ArgumentParser:
     result.add_argument("--claude-skills", type=Path)
     result.add_argument("--codex-skills", type=Path)
     result.add_argument("--claude-commands", type=Path)
+    result.add_argument("--codex-prompts", type=Path)
     result.add_argument("--state-file", type=Path)
     subcommands = result.add_subparsers(dest="command", required=True)
 
@@ -42,6 +43,7 @@ def configured_paths(args: argparse.Namespace) -> Paths:
         args.codex_skills or defaults.codex_skills,
         args.claude_commands or defaults.claude_commands,
         args.state_file or defaults.state_file,
+        args.codex_prompts or defaults.codex_prompts,
     )
 
 

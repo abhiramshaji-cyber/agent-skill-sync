@@ -17,6 +17,7 @@ class SyncTests(unittest.TestCase):
             self.root / "codex-skills",
             self.root / "claude-commands",
             self.root / "state.json",
+            self.root / "codex-prompts",
         )
         for path in (self.paths.claude_skills, self.paths.codex_skills, self.paths.claude_commands):
             path.mkdir()
@@ -98,10 +99,13 @@ class SyncTests(unittest.TestCase):
         command.write_text("---\ndescription: Ship the current branch\n---\nRun ship.py $ARGUMENTS\n")
         report = sync(self.paths, direction="claude-to-codex", apply=True)
         target = self.paths.codex_skills / "claude-command-ship"
-        self.assertEqual(report.changed, 1)
+        self.assertEqual(report.changed, 2)
         self.assertEqual((target / "command.md").read_text(), command.read_text())
         self.assertIn(COMMAND_MARKER, (target / "SKILL.md").read_text())
         self.assertEqual((target / "ship.py").read_text(), helper.read_text())
+        prompt = self.paths.codex_prompts / "ship.md"
+        self.assertIn("$ARGUMENTS", prompt.read_text())
+        self.assertIn("~/.codex/skills/claude-command-ship/ship.py", prompt.read_text())
 
     def test_state_is_valid_json(self) -> None:
         self.skill(self.paths.claude_skills, "alpha", "initial")
