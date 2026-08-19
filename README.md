@@ -80,3 +80,11 @@ warns because two agents that can call each other can recurse.
 ```bash
 python3 -m unittest discover -s tests -v
 ```
+
+## Contributing
+
+Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Licence
+
+MIT. See [LICENSE](LICENSE).
